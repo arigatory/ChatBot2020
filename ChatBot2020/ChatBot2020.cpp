@@ -30,20 +30,26 @@ int main()
         {"hello", "Oh, hello to you human"},
         {"how are you", "I'm good"},
         {"what are you doing", "Answering stupid questions"},
-        {"what is your name","My name is Bot2020"}
+        {"what is your name","My name is Bot2020"},
+        {"exit","Ok byeeee!"}
     };
 
         while (question != "exit") {
             question = user();
-            
+            bool isAnswerFound = false;
             for (auto entry : database)
             {
                 regex pattern = regex(".*" + entry.first + ".*");
                 if (regex_match(question, pattern))
                 {
                     bot(entry.second);
+                    isAnswerFound = true;
                 }
-            }         
+            }
+            if (!isAnswerFound)
+            {
+                bot("Sorry, I don't understand");
+            }
         }
 }
 
